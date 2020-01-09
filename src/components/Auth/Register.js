@@ -9,6 +9,7 @@ import {
 	Message,
 	Icon
 } from "semantic-ui-react";
+import { Link } from "react-router-dom";
 
 class Register extends Component {
 	state = {};
@@ -65,7 +66,9 @@ class Register extends Component {
 							<Button color='orange' fluid size='large'>
 								Submit
 							</Button>
-							<Message>Already a user?</Message>
+							<Message>
+								Already a user? <Link to='/login'>Login</Link>
+							</Message>
 						</Segment>
 					</Form>
 				</Grid.Column>
