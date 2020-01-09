@@ -4,12 +4,17 @@ import "./index.css";
 import App from "./components/App";
 import * as serviceWorker from "./serviceWorker";
 
+import Login from "./components/Auth/Login";
+import Register from "./components/Auth/Register";
+
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 const Root = () => (
 	<Router>
 		<Switch>
-			<Route path='/' component={App} />
+			<Route exact path='/' component={App} />
+			<Route path='/login' component={Login} />
+			<Route path='/register' component={Register} />
 		</Switch>
 	</Router>
 );
