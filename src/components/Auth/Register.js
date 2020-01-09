@@ -12,16 +12,25 @@ import {
 import { Link } from "react-router-dom";
 
 class Register extends Component {
-	state = {};
+	state = {
+		username: "",
+		email: "",
+		password: "",
+		passwordConfirmation: ""
+	};
 
-	handleChange = () => {};
+	handleChange = event => {
+		this.setState({
+			[event.target.name]: event.target.value
+		});
+	};
 
 	render() {
 		return (
 			<Grid textAlign='center' verticalAlign='middle' className='app'>
 				<Grid.Column style={{ maxWidth: 450 }}>
 					<Header as='h2' icon color='orange' textAlign='center'>
-						<Icon name='puzzle piece' color='orange' />
+						<Icon name='caret square right' color='orange' />
 						Register for DevChat
 					</Header>
 					<Form size='large'>
