@@ -20,6 +20,17 @@ class Register extends Component {
 		passwordConfirmation: ""
 	};
 
+	isFormValid = () => {
+		if (this.isFormEmpty()) {
+			//throw error
+		} else if (this.isPasswordValid()) {
+			//throw error
+		} else {
+			//form valid
+			return true;
+		}
+	};
+
 	handleChange = event => {
 		this.setState({
 			[event.target.name]: event.target.value
@@ -27,16 +38,18 @@ class Register extends Component {
 	};
 
 	handleSubmit = event => {
-		event.preventDefault();
-		firebase
-			.auth()
-			.createUserWithEmailAndPassword(this.state.email, this.state.password)
-			.then(createdUser => {
-				console.log(createdUser);
-			})
-			.catch(err => {
-				console.log(err);
-			});
+		if (this.isFormValid()) {
+			event.preventDefault();
+			firebase
+				.auth()
+				.createUserWithEmailAndPassword(this.state.email, this.state.password)
+				.then(createdUser => {
+					console.log(createdUser);
+				})
+				.catch(err => {
+					console.log(err);
+				});
+		}
 	};
 
 	render() {
