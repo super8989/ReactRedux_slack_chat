@@ -17,18 +17,33 @@ class Register extends Component {
 		username: "",
 		email: "",
 		password: "",
-		passwordConfirmation: ""
+		passwordConfirmation: "",
+		errors: []
 	};
 
 	isFormValid = () => {
-		if (this.isFormEmpty()) {
-			//throw error
+		let errors = [];
+		let error;
+
+		if (this.isFormEmpty(this.state)) {
+			error = { message: "Fill in all fields" };
+			this.setState({ errors: errors.concat(error) });
+			return false;
 		} else if (this.isPasswordValid()) {
 			//throw error
 		} else {
 			//form valid
 			return true;
 		}
+	};
+
+	isFormEmpty = ({ username, email, password, passwordConfirmation }) => {
+		return (
+			!username.length ||
+			!email.length ||
+			!password.length ||
+			!passwordConfirmation.length
+		);
 	};
 
 	handleChange = event => {
