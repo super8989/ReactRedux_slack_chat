@@ -125,6 +125,13 @@ class Register extends Component {
 								placeholder='Email Address'
 								onChange={this.handleChange}
 								value={email}
+								className={
+									errors.some(error =>
+										error.message.toLowerCase().includes("email")
+									)
+										? "error"
+										: ""
+								}
 								type='email'
 							/>
 							<Form.Input
