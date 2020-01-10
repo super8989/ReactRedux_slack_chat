@@ -29,9 +29,10 @@ class Register extends Component {
 			error = { message: "Fill in all fields" };
 			this.setState({ errors: errors.concat(error) });
 			return false;
-		} else if (this.isPasswordValid(this.state)) {
+		} else if (!this.isPasswordValid(this.state)) {
 			error = { message: "Password is invalid" };
 			this.setState({ errors: errors.concat(error) });
+			return false;
 		} else {
 			return true;
 		}
