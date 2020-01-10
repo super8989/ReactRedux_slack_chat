@@ -88,6 +88,12 @@ class Register extends Component {
 		}
 	};
 
+	handleInputError = (errors, inputName) => {
+		return errors.some(error => error.message.toLowerCase().includes(inputName))
+			? "error"
+			: "";
+	};
+
 	render() {
 		const {
 			username,
@@ -125,13 +131,7 @@ class Register extends Component {
 								placeholder='Email Address'
 								onChange={this.handleChange}
 								value={email}
-								className={
-									errors.some(error =>
-										error.message.toLowerCase().includes("email")
-									)
-										? "error"
-										: ""
-								}
+								className={this.handleInputError(errors, "email")}
 								type='email'
 							/>
 							<Form.Input
@@ -142,6 +142,7 @@ class Register extends Component {
 								placeholder='Password'
 								onChange={this.handleChange}
 								value={password}
+								className={this.handleInputError(errors, "password")}
 								type='password'
 							/>
 							<Form.Input
@@ -152,6 +153,7 @@ class Register extends Component {
 								placeholder='Password Confirmation'
 								onChange={this.handleChange}
 								value={passwordConfirmation}
+								className={this.handleInputError(errors, "password")}
 								type='password'
 							/>
 
