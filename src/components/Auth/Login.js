@@ -32,10 +32,12 @@ class Login extends Component {
 
 	handleSubmit = event => {
 		event.preventDefault();
-		if (this.isFormValid()) {
+		if (this.isFormValid(this.state)) {
 			this.setState({ errors: [], loading: true });
 		}
 	};
+
+	isFormValid = ({ email, password }) => email && password;
 
 	handleInputError = (errors, inputName) => {
 		return errors.some(error => error.message.toLowerCase().includes(inputName))
