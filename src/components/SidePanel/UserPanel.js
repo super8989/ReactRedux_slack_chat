@@ -17,7 +17,8 @@ class UserPanel extends Component {
 			key: "user",
 			text: (
 				<span>
-					Signed in as <strong>{this.state.user.displayName}</strong>
+					Signed in as{" "}
+					<strong>{this.state.user && this.state.user.displayName}</strong>
 				</span>
 			),
 			disabled: true
