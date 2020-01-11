@@ -17,8 +17,9 @@ import Login from "./components/Auth/Login";
 import Register from "./components/Auth/Register";
 
 import "semantic-ui-css/semantic.min.css";
+import rootReducer from "./reducers";
 
-const store = createStore(() => {}, composeWithDevTools());
+const store = createStore(rootReducer, composeWithDevTools());
 
 class Root extends Component {
 	componentDidMount() {
