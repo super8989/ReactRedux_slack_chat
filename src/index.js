@@ -11,6 +11,14 @@ import Register from "./components/Auth/Register";
 import "semantic-ui-css/semantic.min.css";
 
 class Root extends Component {
+	componentDidMount() {
+		firebase.auth().onAuthStateChanged(user => {
+			if (user) {
+				this.props.history.push("/");
+			}
+		});
+	}
+
 	render() {
 		return (
 			<Router>
