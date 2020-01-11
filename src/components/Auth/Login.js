@@ -16,7 +16,6 @@ class Login extends Component {
 	state = {
 		email: "",
 		password: "",
-
 		errors: [],
 		loading: false
 	};
