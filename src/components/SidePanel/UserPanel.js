@@ -4,12 +4,20 @@ import { connect } from "react-redux";
 import firebase from "../../firebase";
 
 class UserPanel extends Component {
+	state = {
+		user: null
+	};
+
+	componentDidMount() {
+		this.setState({ user: this.props.currentUser });
+	}
+
 	dropdownOptions = () => [
 		{
 			key: "user",
 			text: (
 				<span>
-					Signed in as <strong>User</strong>
+					Signed in as <strong>{this.state.user.displayName}</strong>
 				</span>
 			),
 			disabled: true
