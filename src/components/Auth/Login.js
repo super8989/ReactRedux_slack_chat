@@ -34,6 +34,19 @@ class Login extends Component {
 		event.preventDefault();
 		if (this.isFormValid(this.state)) {
 			this.setState({ errors: [], loading: true });
+			firebase
+				.auth()
+				.signInWithEmailAndPassword(this.state.email, this.state.password)
+				.then(signedInUser => {
+					console.log(signedInUser);
+				})
+				.catch(err => {
+					console.error(err);
+					this.setState({
+						errors: this.state.errors.concat(err),
+						loading: false
+					});
+				});
 		}
 	};
 
