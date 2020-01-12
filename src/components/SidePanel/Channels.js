@@ -6,6 +6,7 @@ import { setCurrentChannel } from "../../actions";
 
 class Channels extends Component {
 	state = {
+		activeChannel: "",
 		user: this.props.currentUser,
 		channels: [],
 		channelName: "",
@@ -39,9 +40,7 @@ class Channels extends Component {
 
 	addChannel = () => {
 		const { channelsRef, channelName, channelDetails, user } = this.state;
-
 		const key = channelsRef.push().key;
-
 		const newChannel = {
 			id: key,
 			name: channelName,
@@ -78,7 +77,12 @@ class Channels extends Component {
 	};
 
 	changeChannel = channel => {
+		this.setActiveChannel(channel);
 		this.props.setCurrentChannel(channel);
+	};
+
+	setActiveChannel = channel => {
+		this.setState({ activeChannel: channel.id });
 	};
 
 	displayChannels = channels =>
@@ -89,6 +93,7 @@ class Channels extends Component {
 				onClick={() => this.changeChannel(channel)}
 				name={channel.name}
 				style={{ opacity: 0.7 }}
+				active={channel.id === this.state.activeChannel}
 			>
 				# {channel.name}
 			</Menu.Item>
