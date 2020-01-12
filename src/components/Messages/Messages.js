@@ -50,12 +50,14 @@ class Messages extends Component {
 			/>
 		));
 
+	displayChannelName = channel => (channel ? `#${channel.name}` : '');
+
 	render() {
 		const { messagesRef, messages, channel, user } = this.state;
 
 		return (
 			<>
-				<MessagesHeader />
+				<MessagesHeader channelName={this.displayChannelName(channel)} />
 				<Segment>
 					<Comment.Group className='messages'>
 						{/* Messages */}
