@@ -1,17 +1,17 @@
-import React, { Component } from "react";
-import { Menu, Icon, Modal, Form, Input, Button } from "semantic-ui-react";
-import firebase from "../../firebase";
-import { connect } from "react-redux";
-import { setCurrentChannel } from "../../actions";
+import React, { Component } from 'react';
+import { Menu, Icon, Modal, Form, Input, Button } from 'semantic-ui-react';
+import firebase from '../../firebase';
+import { connect } from 'react-redux';
+import { setCurrentChannel } from '../../actions';
 
 class Channels extends Component {
 	state = {
-		activeChannel: "",
+		activeChannel: '',
 		user: this.props.currentUser,
 		channels: [],
-		channelName: "",
-		channelDetails: "",
-		channelsRef: firebase.database().ref("channels"),
+		channelName: '',
+		channelDetails: '',
+		channelsRef: firebase.database().ref('channels'),
 		modal: false,
 		firstLoad: true
 	};
@@ -26,7 +26,7 @@ class Channels extends Component {
 
 	addListeners = () => {
 		let loadedChannels = [];
-		this.state.channelsRef.on("child_added", snap => {
+		this.state.channelsRef.on('child_added', snap => {
 			loadedChannels.push(snap.val());
 			// console.log(loadedChannels);
 			this.setState({ channels: loadedChannels }, () => this.setFirstChannel());
@@ -64,9 +64,9 @@ class Channels extends Component {
 			.child(key)
 			.update(newChannel)
 			.then(() => {
-				this.setState({ channelName: "", channelDetails: "" });
+				this.setState({ channelName: '', channelDetails: '' });
 				this.closeModal();
-				console.log("channel added");
+				console.log('channel added');
 			})
 			.catch(err => {
 				console.error(err);
@@ -124,11 +124,11 @@ class Channels extends Component {
 
 		return (
 			<>
-				<Menu.Menu style={{ paddingBottom: "2em" }}>
+				<Menu.Menu className='menu'>
 					<Menu.Item>
 						<span>
 							<Icon name='exchange' /> Channels
-						</span>{" "}
+						</span>{' '}
 						({channels.length}) <Icon name='add' onClick={this.openModal} />
 					</Menu.Item>
 					{/* Channels */}
