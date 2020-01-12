@@ -8,14 +8,19 @@ body,
 
 /* Messages.js */
 .messages {
-	height: 340px;
+	height: 55vh;
 	overflow-y: scroll;
 }
 
-@media only screen and (min-width: 1300px) {
+/* @media only screen and (min-width: 1300px) {
 	.messages {
-		height: 600px;
+		height: 70vh;
 	}
+} */
+
+.messages__progress {
+	height: 50vh;
+	overflow-y: scroll;
 }
 
 /* MessageForm.js */
