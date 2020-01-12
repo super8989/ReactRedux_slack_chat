@@ -34,11 +34,14 @@ const channel_reducer = (state = initialChannelState, action) => {
 				...state,
 				currentChannel: action.payload.currentChannel
 			};
+		default:
+			return state;
 	}
 };
 
 const rootReducer = combineReducers({
-	user: user_reducer
+	user: user_reducer,
+	channel: channel_reducer
 });
 
 export default rootReducer;
