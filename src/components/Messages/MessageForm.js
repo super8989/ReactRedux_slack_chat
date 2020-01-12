@@ -124,7 +124,7 @@ class MessageForm extends Component {
 		ref
 			.child(pathToUpload)
 			.push()
-			.set(this.createMessgae(fileUrl))
+			.set(this.createMessage(fileUrl))
 			.catch(err => {
 				console.error(err);
 				this.setState({
