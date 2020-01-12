@@ -12,6 +12,12 @@ body,
 	overflow-y: scroll;
 }
 
+@media only screen and (min-width: 1300px) {
+	.messages {
+		height: 600px;
+	}
+}
+
 /* MessageForm.js */
 .message__form {
 	position: fixed !important;
