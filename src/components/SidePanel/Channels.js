@@ -1,24 +1,62 @@
 import React, { Component } from "react";
-import { Menu, Icon } from "semantic-ui-react";
+import { Menu, Icon, Modal, Form, Input } from "semantic-ui-react";
 
 class Channels extends Component {
 	state = {
-		channels: []
+		channels: [],
+		channelName: "",
+		channelDetails: "",
+		modal: false
+	};
+
+	handleChange = event => {
+		this.setState({ [event.target.name]: event.target.value });
+	};
+
+	closeModal = () => {
+		this.setState({ modal: false });
 	};
 
 	render() {
-		const { channels } = this.state;
+		const { channels, modal } = this.state;
 
 		return (
-			<Menu.Menu style={{ paddingBottom: "2em" }}>
-				<Menu.Item>
-					<span>
-						<Icon name='exchange' /> Channels
-					</span>{" "}
-					{""}({channels.length}) <Icon name='add' />
-				</Menu.Item>
-				{/* Channels */}
-			</Menu.Menu>
+			<>
+				<Menu.Menu style={{ paddingBottom: "2em" }}>
+					<Menu.Item>
+						<span>
+							<Icon name='exchange' /> Channels
+						</span>{" "}
+						{""}({channels.length}) <Icon name='add' />
+					</Menu.Item>
+					{/* Channels */}
+				</Menu.Menu>
+				{/* Add Channel Modal */}
+				<Modal basic open={true} onClose={this.closeModal}>
+					<Modal.Header>Add a Channel</Modal.Header>
+					<Modal.Content>
+						<Form>
+							<Form.Field>
+								<Input
+									fluid
+									label='Name of Channel'
+									name='channelName'
+									onChange={this.handleChange}
+								/>
+							</Form.Field>
+
+							<Form.Field>
+								<Input
+									fluid
+									label='About the Channel'
+									name='channelDetails'
+									onChange={this.handleChange}
+								/>
+							</Form.Field>
+						</Form>
+					</Modal.Content>
+				</Modal>
+			</>
 		);
 	}
 }
