@@ -13,7 +13,9 @@ class Messages extends Component {
 		messagesLoading: true,
 		channel: this.props.currentChannel,
 		user: this.props.currentUser,
-		numUniqueUsers: ''
+		numUniqueUsers: '',
+		searchTerm: '',
+		searchLoading: false
 	};
 
 	componentDidMount() {
@@ -38,6 +40,13 @@ class Messages extends Component {
 				messagesLoading: false
 			});
 			this.countUniqueUsers(loadedMessages);
+		});
+	};
+
+	handleSearchChange = event => {
+		this.setState({
+			searchTerm: event.target.value,
+			searchLoading: true
 		});
 	};
 
@@ -73,6 +82,7 @@ class Messages extends Component {
 				<MessagesHeader
 					channelName={this.displayChannelName(channel)}
 					numUniqueUsers={numUniqueUsers}
+					handleSearchChange={this.handleSearchChange}
 				/>
 				<Segment>
 					<Comment.Group className='messages'>
