@@ -65,12 +65,16 @@ class Channels extends Component {
 		this.setState({ [event.target.name]: event.target.value });
 	};
 
+	changeChannel = channel => {
+		// this.props.setCurrentChannel(channel);
+	};
+
 	displayChannels = channels =>
 		channels.length > 0 &&
 		channels.map(channel => (
 			<Menu.Item
 				key={channel.id}
-				onClick={() => console.log(channel)}
+				onClick={() => this.changeChannel(channel)}
 				name={channel.name}
 				style={{ opacity: 0.7 }}
 			>
