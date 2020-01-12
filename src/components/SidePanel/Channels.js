@@ -13,6 +13,10 @@ class Channels extends Component {
 		this.setState({ [event.target.name]: event.target.value });
 	};
 
+	openModal = () => {
+		this.setState({ modal: true });
+	};
+
 	closeModal = () => {
 		this.setState({ modal: false });
 	};
@@ -27,12 +31,12 @@ class Channels extends Component {
 						<span>
 							<Icon name='exchange' /> Channels
 						</span>{" "}
-						{""}({channels.length}) <Icon name='add' />
+						({channels.length}) <Icon name='add' onClick={this.openModal} />
 					</Menu.Item>
 					{/* Channels */}
 				</Menu.Menu>
 				{/* Add Channel Modal */}
-				<Modal basic open={true} onClose={this.closeModal}>
+				<Modal basic open={modal} onClose={this.closeModal}>
 					<Modal.Header>Add a Channel</Modal.Header>
 					<Modal.Content>
 						<Form>
