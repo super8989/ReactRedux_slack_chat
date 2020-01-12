@@ -50,22 +50,14 @@ class Messages extends Component {
 			/>
 		));
 
-	isProgressBarVisible = percent => {
-		if (percent > 0) {
-			this.setState({ progressBar: true });
-		}
-	};
-
 	render() {
-		const { messagesRef, messages, channel, user, progressBar } = this.state;
+		const { messagesRef, messages, channel, user } = this.state;
 
 		return (
 			<>
 				<MessagesHeader />
 				<Segment>
-					<Comment.Group
-						className={progressBar ? 'messages__progress' : 'messages'}
-					>
+					<Comment.Group className='messages'>
 						{/* Messages */}
 						{this.displayMessages(messages)}
 					</Comment.Group>
@@ -75,7 +67,6 @@ class Messages extends Component {
 					messagesRef={messagesRef}
 					currentChannel={channel}
 					currentUser={user}
-					isProgressBarVisible={this.isProgressBarVisible}
 				/>
 			</>
 		);
