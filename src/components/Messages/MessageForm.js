@@ -57,6 +57,8 @@ class MessageForm extends Component {
 	};
 
 	render() {
+		const { errors } = this.state;
+
 		return (
 			<Segment className='message__form'>
 				<Input
@@ -66,6 +68,11 @@ class MessageForm extends Component {
 					style={{ marginBottom: '0.7em' }}
 					label={<Button icon={'add'} />}
 					labelPosition='left'
+					className={
+						errors.some(error => error.message.includes('message'))
+							? 'error'
+							: ''
+					}
 					placeholder='Write your message'
 				/>
 				<Button.Group icon widths='2'>
