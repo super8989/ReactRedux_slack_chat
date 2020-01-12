@@ -65,7 +65,7 @@ class Channels extends Component {
 							<Icon name='checkmark' />
 							Add
 						</Button>
-						<Button color='red' inverted>
+						<Button color='red' inverted onClick={this.closeModal}>
 							<Icon name='remove' />
 							Cancel
 						</Button>
