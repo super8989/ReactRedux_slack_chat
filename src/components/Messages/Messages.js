@@ -15,7 +15,8 @@ class Messages extends Component {
 		user: this.props.currentUser,
 		numUniqueUsers: '',
 		searchTerm: '',
-		searchLoading: false
+		searchLoading: false,
+		searchResults: []
 	};
 
 	componentDidMount() {
@@ -44,10 +45,25 @@ class Messages extends Component {
 	};
 
 	handleSearchChange = event => {
-		this.setState({
-			searchTerm: event.target.value,
-			searchLoading: true
-		});
+		this.setState(
+			{
+				searchTerm: event.target.value,
+				searchLoading: true
+			},
+			() => this.handleSearchMessages()
+		);
+	};
+
+	handleSearchMessages = () => {
+		const channelMessages = [...this.state.messages];
+		const regex = new RegExp(this.state.searchTerm, 'gi');
+		const searchResults = channelMessages.reduce((acc, message) => {
+			if (message.content && message.content.match(regex)) {
+				acc.push(message);
+			}
+			return acc;
+		}, []);
+		this.setState({ searchResults });
 	};
 
 	countUniqueUsers = messages => {
@@ -75,7 +91,8 @@ class Messages extends Component {
 	displayChannelName = channel => (channel ? `#${channel.name}` : '');
 
 	render() {
-		const { messagesRef, messages, channel, user, numUniqueUsers } = this.state;
+		//prettier-ignore
+		const { messagesRef, messages, channel, user, numUniqueUsers, searchTerm, searchResults } = this.state;
 
 		return (
 			<>
@@ -87,7 +104,9 @@ class Messages extends Component {
 				<Segment>
 					<Comment.Group className='messages'>
 						{/* Messages */}
-						{this.displayMessages(messages)}
+						{searchTerm
+							? this.displayMessages(searchResults)
+							: this.displayMessages(messages)}
 					</Comment.Group>
 				</Segment>
 
