@@ -13,7 +13,7 @@ class Messages extends Component {
 		messagesLoading: true,
 		channel: this.props.currentChannel,
 		user: this.props.currentUser,
-		progressBar: false
+		numUniqueUsers: ''
 	};
 
 	componentDidMount() {
@@ -37,7 +37,19 @@ class Messages extends Component {
 				messages: loadedMessages,
 				messagesLoading: false
 			});
+			this.countUniqueUsers(loadedMessages);
 		});
+	};
+
+	countUniqueUsers = messages => {
+		const uniqueUsers = messages.reduce((acc, message) => {
+			if (!acc.includes(message.user.name)) {
+				acc.push(message.user.name);
+			}
+			return acc;
+		}, []);
+		const numUniqueUsers = `${uniqueUsers.length} users`;
+		this.setState({ numUniqueUsers });
 	};
 
 	displayMessages = messages =>
@@ -53,11 +65,14 @@ class Messages extends Component {
 	displayChannelName = channel => (channel ? `#${channel.name}` : '');
 
 	render() {
-		const { messagesRef, messages, channel, user } = this.state;
+		const { messagesRef, messages, channel, user, numUniqueUsers } = this.state;
 
 		return (
 			<>
-				<MessagesHeader channelName={this.displayChannelName(channel)} />
+				<MessagesHeader
+					channelName={this.displayChannelName(channel)}
+					numUniqueUsers={numUniqueUsers}
+				/>
 				<Segment>
 					<Comment.Group className='messages'>
 						{/* Messages */}
