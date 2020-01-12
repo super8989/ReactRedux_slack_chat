@@ -34,6 +34,7 @@ class Channels extends Component {
 
 		if (this.state.firstLoad && this.state.channels.length > 0) {
 			this.props.setCurrentChannel(firstChannel);
+			this.setActiveChannel(firstChannel);
 		}
 		this.setState({ firstLoad: false });
 	};
