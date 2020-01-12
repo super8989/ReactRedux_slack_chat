@@ -37,7 +37,7 @@ class UserPanel extends Component {
 	render() {
 		const { user } = this.state;
 
-		console.log(this.props.currentUser);
+		// console.log(this.props.currentUser);
 
 		return (
 			<Grid style={{ background: "#4c3c4c" }}>

@@ -12,6 +12,18 @@ class Channels extends Component {
 		modal: false
 	};
 
+	componentDidMount() {
+		this.addListeners();
+	}
+
+	addListeners = () => {
+		let loadedChannels = [];
+		this.state.channelsRef.on("child_added", snap => {
+			loadedChannels.push(snap.val());
+			console.log(loadedChannels);
+		});
+	};
+
 	addChannel = () => {
 		const { channelsRef, channelName, channelDetails, user } = this.state;
 
