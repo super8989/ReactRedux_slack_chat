@@ -7,7 +7,8 @@ class MessagesHeader extends Component {
 			channelName,
 			numUniqueUsers,
 			handleSearchChange,
-			searchLoading
+			searchLoading,
+			isPrivateChannel
 		} = this.props;
 
 		return (
@@ -15,7 +16,8 @@ class MessagesHeader extends Component {
 				{/* Channel Title */}
 				<Header fluid='true' as='h2' floated='left' style={{ maginBottom: 0 }}>
 					<span>
-						{channelName} <Icon name={'tv'} color='black' />
+						{channelName}{' '}
+						{!isPrivateChannel && <Icon name={'tv'} color='black' />}
 					</span>
 					<Header.Subheader>{numUniqueUsers}</Header.Subheader>
 				</Header>
