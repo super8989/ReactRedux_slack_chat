@@ -62,8 +62,10 @@ class MetaPanel extends Component {
 						Created By
 					</Accordion.Title>
 					<Accordion.Content active={activeIndex === 2}>
-						<Image src={channel && channel.createdBy.avatar} />
-						{channel && channel.createdBy.name}
+						<Header as='h3'>
+							<Image circular src={channel && channel.createdBy.avatar} />
+							{channel && channel.createdBy.name}
+						</Header>
 					</Accordion.Content>
 				</Accordion>
 			</Segment>
