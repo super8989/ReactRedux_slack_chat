@@ -14,6 +14,7 @@ class Messages extends Component {
 		messages: [],
 		messagesLoading: true,
 		channel: this.props.currentChannel,
+		isChannelStarred: false,
 		user: this.props.currentUser,
 		numUniqueUsers: '',
 		searchTerm: '',
@@ -51,6 +52,23 @@ class Messages extends Component {
 	getMessagesRef = () => {
 		const { messagesRef, privateMessagesRef, privateChannel } = this.state;
 		return privateChannel ? privateMessagesRef : messagesRef;
+	};
+
+	handleStar = () => {
+		this.setState(
+			prevState => ({
+				isChannelStarred: !prevState.isChannelStarred
+			}),
+			() => this.starChannel()
+		);
+	};
+
+	starChannel = () => {
+		if (this.state.isChannelStarred) {
+			console.log('star');
+		} else {
+			console.log('unstar');
+		}
 	};
 
 	handleSearchChange = event => {
@@ -117,7 +135,8 @@ class Messages extends Component {
 			searchTerm,
 			searchResults,
 			searchLoading,
-			privateChannel
+			privateChannel,
+			isChannelStarred
 		} = this.state;
 
 		return (
@@ -128,6 +147,8 @@ class Messages extends Component {
 					handleSearchChange={this.handleSearchChange}
 					searchLoading={searchLoading}
 					isPrivateChannel={privateChannel}
+					handleStar={this.handleStar}
+					isChannelStarred={isChannelStarred}
 				/>
 				<Segment>
 					<Comment.Group className='messages'>
