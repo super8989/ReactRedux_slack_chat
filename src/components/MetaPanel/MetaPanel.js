@@ -18,7 +18,7 @@ class MetaPanel extends Component {
 	render() {
 		const { activeIndex, privateChannel, channel } = this.state;
 
-		if (privateChannel) return null;
+		if (privateChannel || !channel) return null;
 
 		return (
 			<Segment>
