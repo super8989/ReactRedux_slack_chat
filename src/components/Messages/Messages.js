@@ -16,6 +16,7 @@ class Messages extends Component {
 		channel: this.props.currentChannel,
 		isChannelStarred: false,
 		user: this.props.currentUser,
+		usersRef: firebase.database().ref('users'),
 		numUniqueUsers: '',
 		searchTerm: '',
 		searchLoading: false,
@@ -65,9 +66,27 @@ class Messages extends Component {
 
 	starChannel = () => {
 		if (this.state.isChannelStarred) {
-			console.log('star');
+			// console.log('star')
+			this.state.usersRef.child(`${this.state.user.uid}/starred`).update({
+				[this.state.channel.id]: {
+					name: this.state.channel.name,
+					details: this.state.channel.details,
+					createdBy: {
+						name: this.state.channel.createdBy.name,
+						avatar: this.state.channel.createdBy.avatar
+					}
+				}
+			});
 		} else {
-			console.log('unstar');
+			// console.log('unstar');
+			this.state.usersRef
+				.child(`${this.state.user.uid}/starred`)
+				.child(this.state.channel.id)
+				.remove(err => {
+					if (err !== null) {
+						console.error(err);
+					}
+				});
 		}
 	};
 
