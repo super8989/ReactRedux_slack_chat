@@ -8,10 +8,11 @@ import {
 	Icon,
 	Label
 } from 'semantic-ui-react';
+import { SliderPicker } from 'react-color';
 
 class ColorPanel extends Component {
 	state = {
-		modal: true
+		modal: false
 	};
 
 	openModal = () => this.setState({ modal: true });
@@ -36,7 +37,12 @@ class ColorPanel extends Component {
 				{/* Color Picker Modal */}
 				<Modal basic open={modal} onClose={this.closeModal}>
 					<Modal.Header>Choose App Colors</Modal.Header>
-					<Modal.Content></Modal.Content>
+					<Modal.Content>
+						<Label content='Primary Color' />
+						<SliderPicker />
+						<Label content='Secondary Color' />
+						<SliderPicker />
+					</Modal.Content>
 					<Modal.Actions>
 						<Button color='green' inverted>
 							<Icon name='checkmark' />
