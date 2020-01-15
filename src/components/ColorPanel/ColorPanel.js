@@ -48,7 +48,7 @@ class ColorPanel extends Component {
 							<Icon name='checkmark' />
 							Save Colors
 						</Button>
-						<Button color='red' inverted>
+						<Button color='red' inverted onClick={this.closeModal}>
 							<Icon name='remove' />
 							Cancel
 						</Button>
