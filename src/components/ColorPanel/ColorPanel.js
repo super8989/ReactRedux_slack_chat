@@ -13,6 +13,20 @@ class ColorPanel extends Component {
 		usersRef: firebase.database().ref('users')
 	};
 
+	componentDidMount() {
+		if (this.state.user) {
+			this.addListener(this.state.user.uid);
+		}
+	}
+
+	addListener = userId => {
+		let userColors = [];
+		this.state.usersRef.child(`${userId}/colors`).on('child_added', snap => {
+			userColors.unshift(snap.val());
+			console.log(userColors);
+		});
+	};
+
 	handleChangePrimary = color => this.setState({ primary: color.hex });
 
 	handleChangeSecondary = color => this.setState({ secondary: color.hex });
