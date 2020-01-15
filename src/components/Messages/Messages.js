@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Segment, Comment } from 'semantic-ui-react';
 import firebase from '../../firebase';
+import { connect } from 'react-redux';
+import { setUserPosts } from '../../actions';
 
 import MessagesHeader from './MessagesHeader';
 import MessageForm from './MessageForm';
@@ -156,7 +158,8 @@ class Messages extends Component {
 			}
 			return acc;
 		}, {});
-		console.log(userPosts);
+		// console.log(userPosts);
+		this.props.setUserPosts(userPosts);
 	};
 
 	displayMessages = messages =>
@@ -221,4 +224,4 @@ class Messages extends Component {
 	}
 }
 
-export default Messages;
+export default connect(null, { setUserPosts })(Messages);
