@@ -33,7 +33,8 @@ class MetaPanel extends Component {
 						<List.Description>{val.count} posts</List.Description>
 					</List.Content>
 				</List.Item>
-			));
+			))
+			.slice(0, 5);
 
 	render() {
 		const { activeIndex, privateChannel, channel } = this.state;
