@@ -10,7 +10,8 @@ class ColorPanel extends Component {
 		primary: '',
 		secondary: '',
 		user: this.props.currentUser,
-		usersRef: firebase.database().ref('users')
+		usersRef: firebase.database().ref('users'),
+		userColors: []
 	};
 
 	componentDidMount() {
@@ -23,7 +24,8 @@ class ColorPanel extends Component {
 		let userColors = [];
 		this.state.usersRef.child(`${userId}/colors`).on('child_added', snap => {
 			userColors.unshift(snap.val());
-			console.log(userColors);
+			// console.log(userColors);
+			this.setState({ userColors });
 		});
 	};
 
@@ -52,12 +54,28 @@ class ColorPanel extends Component {
 			.catch(err => console.error(err));
 	};
 
+	displayUserColors = colors =>
+		colors.length > 0 &&
+		colors.map((color, i) => (
+			<React.Fragment key={i}>
+				<Divider />
+				<div className='color__container'>
+					<div className='color__square' style={{ background: color.primary }}>
+						<div
+							className='color__overlay'
+							style={{ background: color.secondary }}
+						></div>
+					</div>
+				</div>
+			</React.Fragment>
+		));
+
 	openModal = () => this.setState({ modal: true });
 
 	closeModal = () => this.setState({ modal: false });
 
 	render() {
-		const { modal, primary, secondary } = this.state;
+		const { modal, primary, secondary, userColors } = this.state;
 
 		return (
 			<Sidebar
@@ -70,6 +88,7 @@ class ColorPanel extends Component {
 			>
 				<Divider />
 				<Button icon='add' size='small' color='blue' onClick={this.openModal} />
+				{this.displayUserColors(userColors)}
 
 				{/* Color Picker Modal */}
 				<Modal basic open={modal} onClose={this.closeModal}>
