@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
+import firebase from '../../firebase';
 //prettier-ignore
 import { Grid, Header, Icon, Dropdown, Image, Modal, Input, Button } from 'semantic-ui-react';
-import firebase from '../../firebase';
 
 class UserPanel extends Component {
 	state = {
 		user: this.props.currentUser,
-		modal: false
+		modal: false,
+		previewImage: ''
 	};
 
 	openModal = () => this.setState({ modal: true });
@@ -32,6 +33,18 @@ class UserPanel extends Component {
 			text: <span onClick={this.handleSignout}>Sign Out</span>
 		}
 	];
+
+	handleChange = event => {
+		const file = event.target.files[0];
+		const reader = new FileReader();
+
+		if (file) {
+			reader.readAsDataURL(file);
+			reader.addEventListener('load', () => {
+				this.setState({ previewImage: reader.result });
+			});
+		}
+	};
 
 	handleSignout = () => {
 		firebase
@@ -73,7 +86,13 @@ class UserPanel extends Component {
 					<Modal basic open={modal} onClose={this.closeModal}>
 						<Modal.Header>Change Avatar</Modal.Header>
 						<Modal.Content>
-							<Input fluid type='file' label='New Avatar' name='previewImage' />
+							<Input
+								onChange={this.handleChange}
+								fluid
+								type='file'
+								label='New Avatar'
+								name='previewImage'
+							/>
 							<Grid centered stackable columns={2}>
 								<Grid.Row centered>
 									<Grid.Column className='ui center aligned grid'>
