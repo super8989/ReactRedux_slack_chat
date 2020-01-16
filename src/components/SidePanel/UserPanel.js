@@ -138,10 +138,11 @@ class UserPanel extends Component {
 							</Grid>
 						</Modal.Content>
 						<Modal.Actions>
-							<Button color='green' inverted>
-								<Icon name='save' /> Change Avatar
-							</Button>
-
+							{croppedImage && (
+								<Button color='green' inverted>
+									<Icon name='save' /> Change Avatar
+								</Button>
+							)}
 							<Button color='green' inverted onClick={this.handleCropImage}>
 								<Icon name='image' /> Preview
 							</Button>
