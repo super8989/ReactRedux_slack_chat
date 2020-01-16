@@ -8,7 +8,9 @@ class UserPanel extends Component {
 	state = {
 		user: this.props.currentUser,
 		modal: false,
-		previewImage: ''
+		previewImage: '',
+		croppedImage: '',
+		blob: ''
 	};
 
 	openModal = () => this.setState({ modal: true });
@@ -47,6 +49,18 @@ class UserPanel extends Component {
 		}
 	};
 
+	handleCropImage = () => {
+		if (this.avatarEditor) {
+			this.avatarEditor.getImageScaledToCanvas().toBlob(blob => {
+				let imageUrl = URL.createObjectURL(blob);
+				this.setState({
+					croppedImage: imageUrl,
+					blob
+				});
+			});
+		}
+	};
+
 	handleSignout = () => {
 		firebase
 			.auth()
@@ -55,7 +69,7 @@ class UserPanel extends Component {
 	};
 
 	render() {
-		const { user, modal, previewImage } = this.state;
+		const { user, modal, previewImage, croppedImage } = this.state;
 		const { primaryColor } = this.props;
 
 		// console.log(this.props.currentUser);
@@ -100,6 +114,7 @@ class UserPanel extends Component {
 										{/* Image Preview */}
 										{previewImage && (
 											<AvatarEditor
+												ref={node => (this.avatarEditor = node)}
 												image={previewImage}
 												width={120}
 												height={120}
@@ -108,7 +123,17 @@ class UserPanel extends Component {
 											/>
 										)}
 									</Grid.Column>
-									<Grid.Column>{/* Cropped Image Preview */}</Grid.Column>
+									<Grid.Column>
+										{/* Cropped Image Preview */}
+										{croppedImage && (
+											<Image
+												style={{ margin: '3.5em auto' }}
+												width={100}
+												height={100}
+												src={croppedImage}
+											/>
+										)}
+									</Grid.Column>
 								</Grid.Row>
 							</Grid>
 						</Modal.Content>
@@ -116,7 +141,8 @@ class UserPanel extends Component {
 							<Button color='green' inverted>
 								<Icon name='save' /> Change Avatar
 							</Button>
-							<Button color='green' inverted>
+
+							<Button color='green' inverted onClick={this.handleCropImage}>
 								<Icon name='image' /> Preview
 							</Button>
 							<Button color='red' inverted onClick={this.closeModal}>
