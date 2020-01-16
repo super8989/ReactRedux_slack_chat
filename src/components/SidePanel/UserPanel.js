@@ -10,7 +10,13 @@ class UserPanel extends Component {
 		modal: false,
 		previewImage: '',
 		croppedImage: '',
-		blob: ''
+		blob: '',
+		uploadedCroppedImage: '',
+		storageRef: firebase.storage().ref(),
+		userRef: firebase.auth().currentUser,
+		metadata: {
+			contentType: 'image/jpeg'
+		}
 	};
 
 	openModal = () => this.setState({ modal: true });
@@ -36,6 +42,21 @@ class UserPanel extends Component {
 			text: <span onClick={this.handleSignout}>Sign Out</span>
 		}
 	];
+
+	uploadCroppedImage = () => {
+		const { storageRef, userRef, blob } = this.state;
+
+		storageRef
+			.child(`avatars/user-${userRef.uid}`)
+			.put(blob, metadata)
+			.then(snap => {
+				snap.ref.getDownloadURL().then(downloadURL => {
+					this.setState({ uploadedCroppedImage: downloadURL }, () =>
+						this.changeAvatar()
+					);
+				});
+			});
+	};
 
 	handleChange = event => {
 		const file = event.target.files[0];
@@ -139,7 +160,11 @@ class UserPanel extends Component {
 						</Modal.Content>
 						<Modal.Actions>
 							{croppedImage && (
-								<Button color='green' inverted>
+								<Button
+									color='green'
+									inverted
+									onClick={this.uploadCroppedImage}
+								>
 									<Icon name='save' /> Change Avatar
 								</Button>
 							)}
