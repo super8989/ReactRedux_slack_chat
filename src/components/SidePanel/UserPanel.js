@@ -14,6 +14,7 @@ class UserPanel extends Component {
 		uploadedCroppedImage: '',
 		storageRef: firebase.storage().ref(),
 		userRef: firebase.auth().currentUser,
+		usersRef: firebase.database().ref('users'),
 		metadata: {
 			contentType: 'image/jpeg'
 		}
@@ -44,7 +45,7 @@ class UserPanel extends Component {
 	];
 
 	uploadCroppedImage = () => {
-		const { storageRef, userRef, blob } = this.state;
+		const { storageRef, userRef, blob, metadata } = this.state;
 
 		storageRef
 			.child(`avatars/user-${userRef.uid}`)
@@ -55,6 +56,30 @@ class UserPanel extends Component {
 						this.changeAvatar()
 					);
 				});
+			});
+	};
+
+	changeAvatar = () => {
+		this.state.userRef
+			.updateProfile({
+				photoURL: this.state.uploadedCroppedImage
+			})
+			.then(() => {
+				console.log('PhotoURL updated');
+				this.closeModal();
+			})
+			.catch(err => {
+				console.error(err);
+			});
+
+		this.state.usersRef
+			.child(this.state.user.uid)
+			.update({ avatar: this.state.uploadedCroppedImage })
+			.then(() => {
+				console.log('User avatar updated');
+			})
+			.catch(err => {
+				console.error(err);
 			});
 	};
 
