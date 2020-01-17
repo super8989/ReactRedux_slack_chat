@@ -210,6 +210,9 @@ class Messages extends Component {
 						{searchTerm
 							? this.displayMessages(searchResults)
 							: this.displayMessages(messages)}
+						<div style={{ display: 'flex', alignItems: 'center' }}>
+							<span className='user__typing'>beth is typing</span> <Typing />
+						</div>
 					</Comment.Group>
 				</Segment>
 
