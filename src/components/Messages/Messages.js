@@ -7,6 +7,7 @@ import { setUserPosts } from '../../actions';
 import MessagesHeader from './MessagesHeader';
 import MessageForm from './MessageForm';
 import Message from './Message';
+import Typing from './Typing';
 
 class Messages extends Component {
 	state = {
