@@ -9,6 +9,8 @@ import MessageForm from './MessageForm';
 import Message from './Message';
 import Typing from './Typing';
 
+import Skeleton from './Skeleton';
+
 class Messages extends Component {
 	state = {
 		privateChannel: this.props.isPrivateChannel,
@@ -241,6 +243,15 @@ class Messages extends Component {
 			</div>
 		));
 
+	displayMessageSkeleton = loading =>
+		loading ? (
+			<>
+				{[...Array(10)].map((_, i) => (
+					<Skeleton key={i} />
+				))}
+			</>
+		) : null;
+
 	render() {
 		const {
 			messagesRef,
@@ -253,7 +264,8 @@ class Messages extends Component {
 			searchLoading,
 			privateChannel,
 			isChannelStarred,
-			typingUsers
+			typingUsers,
+			messagesLoading
 		} = this.state;
 
 		return (
@@ -270,6 +282,7 @@ class Messages extends Component {
 				<Segment>
 					<Comment.Group className='messages'>
 						{/* Messages */}
+						{this.displayMessageSkeleton(messagesLoading)}
 						{searchTerm
 							? this.displayMessages(searchResults)
 							: this.displayMessages(messages)}
