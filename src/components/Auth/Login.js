@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import firebase from "../../firebase";
+import React, { Component } from 'react';
+import firebase from '../../firebase';
 
 import {
 	Grid,
@@ -9,13 +9,13 @@ import {
 	Header,
 	Message,
 	Icon
-} from "semantic-ui-react";
-import { Link } from "react-router-dom";
+} from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 
 class Login extends Component {
 	state = {
-		email: "",
-		password: "",
+		email: '',
+		password: '',
 		errors: [],
 		loading: false
 	};
@@ -53,8 +53,8 @@ class Login extends Component {
 
 	handleInputError = (errors, inputName) => {
 		return errors.some(error => error.message.toLowerCase().includes(inputName))
-			? "error"
-			: "";
+			? 'error'
+			: '';
 	};
 
 	render() {
@@ -75,32 +75,36 @@ class Login extends Component {
 					</Header>
 					<Form onSubmit={this.handleSubmit} size='large'>
 						<Segment stacked>
+							<Header as='h5'>
+								For demo, you can register or use sam@gmail.com
+							</Header>
 							<Form.Input
 								fluid
 								name='email'
 								icon='mail'
 								iconPosition='left'
-								placeholder='Email Address'
+								placeholder='sam@gmail.com'
 								onChange={this.handleChange}
 								value={email}
-								className={this.handleInputError(errors, "email")}
+								className={this.handleInputError(errors, 'email')}
 								type='email'
 							/>
+							<Header as='h4'>Password: hello12</Header>
 							<Form.Input
 								fluid
 								name='password'
 								icon='lock'
 								iconPosition='left'
-								placeholder='Password'
+								placeholder='hello12'
 								onChange={this.handleChange}
 								value={password}
-								className={this.handleInputError(errors, "password")}
+								className={this.handleInputError(errors, 'password')}
 								type='password'
 							/>
 
 							<Button
 								disabled={loading}
-								className={loading ? "loading" : ""}
+								className={loading ? 'loading' : ''}
 								color='violet'
 								fluid
 								size='large'
