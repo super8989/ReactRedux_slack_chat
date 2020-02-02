@@ -13,15 +13,15 @@ Live chat application
 
 ![ScreenShot](https://raw.github.com/super8989/ReactRedux_slack_chat/master/screenshot/1.png)
 
-<p>&nbsp;</p>
+
 
 ![ScreenShot](https://raw.github.com/super8989/ReactRedux_slack_chat/master/screenshot/2.png)
 
-<p>&nbsp;</p>
+
 
 ![ScreenShot](https://raw.github.com/super8989/ReactRedux_slack_chat/master/screenshot/3.png)
 
-<p>&nbsp;</p>
+
 
 ![ScreenShot](https://raw.github.com/super8989/ReactRedux_slack_chat/master/screenshot/4.png)
 
